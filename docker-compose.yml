@@ -1,0 +1,7 @@
+services:
+  app:
+    build: .
+    container_name: gradio-app
+    ports:
+      - "7860:7860"
+    restart: unless-stopped
