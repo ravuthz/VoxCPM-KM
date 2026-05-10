@@ -84,11 +84,11 @@ def generate_tts_audio(
     Generate speech from text using VoxCPM; optional reference audio for voice style guidance.
     Returns (sample_rate, waveform_numpy)
     """
-    # current_model = get_or_load_voxcpm()
-    current_model = VoxCPM.from_pretrained(
-        DEFAULT_MODEL,
-        load_denoiser=False,
-    )
+    current_model = get_or_load_voxcpm()
+    # current_model = VoxCPM.from_pretrained(
+    #     DEFAULT_MODEL,
+    #     load_denoiser=False,
+    # )
 
     text = (text_input or "").strip()
     if len(text) == 0:
