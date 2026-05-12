@@ -233,20 +233,17 @@ def get_env(name: str, default: int) -> int:
     return int(value)
 
 def main():
-    # with gr.Blocks() as interface:
-    #     create_demo_interface()
-
-    interface = create_demo_interface()
-    interface.queue(
-        max_size=get_env("GRADIO_QUEUE_MAX_SIZE", 10),
-        default_concurrency_limit=get_env("GRADIO_DEFAULT_CONCURRENCY_LIMIT", 4)
-    )
-    
-    interface.launch(
-        server_name=os.environ.get("PORT", "0.0.0.0"),
-        server_port=int(os.environ.get("PORT", 7860)),
-        show_error=True,
-    )
+    with gr.Blocks() as interface:
+        interface = create_demo_interface()
+        interface.queue(
+            max_size=get_env("GRADIO_QUEUE_MAX_SIZE", 10),
+            default_concurrency_limit=get_env("GRADIO_DEFAULT_CONCURRENCY_LIMIT", 4)
+        )
+        interface.launch(
+            server_name=os.environ.get("PORT", "0.0.0.0"),
+            server_port=int(os.environ.get("PORT", 7860)),
+            show_error=True,
+        )
 
 
 if __name__ == "__main__":
