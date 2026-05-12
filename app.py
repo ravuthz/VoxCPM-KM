@@ -239,7 +239,8 @@ def main():
     interface = create_demo_interface()
     interface.queue(
         max_size=get_env("GRADIO_QUEUE_MAX_SIZE", 10),
-        default_concurrency_limit=_get_int_env("GRADIO_DEFAULT_CONCURRENCY_LIMIT", 4),
+        default_concurrency_limit=get_env("GRADIO_DEFAULT_CONCURRENCY_LIMIT", 4)
+    )
     
     interface.launch(
         server_name=os.environ.get("PORT", "0.0.0.0"),
