@@ -226,11 +226,21 @@ def create_demo_interface():
         fn=prompt_wav_recognition, inputs=[prompt_wav], outputs=[prompt_text]
     )
 
+def get_env(name: str, default: int) -> int:
+    value = os.environ.get(name, "").strip()
+    if not value:
+        return default
+    return int(value)
 
 def main():
-    with gr.Blocks() as interface:
-        create_demo_interface()
+    # with gr.Blocks() as interface:
+    #     create_demo_interface()
 
+    interface = create_demo_interface()
+    interface.queue(
+        max_size=get_env("GRADIO_QUEUE_MAX_SIZE", 10),
+        default_concurrency_limit=_get_int_env("GRADIO_DEFAULT_CONCURRENCY_LIMIT", 4),
+    
     interface.launch(
         server_name=os.environ.get("PORT", "0.0.0.0"),
         server_port=int(os.environ.get("PORT", 7860)),
