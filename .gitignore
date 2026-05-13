@@ -446,5 +446,6 @@ wheels/
 venv
 .data
 data
+.gradio/
 
 demo*.*
